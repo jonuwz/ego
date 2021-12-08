@@ -42,6 +42,11 @@ func main() {
 
 func verifyReport(report attestation.Report) error {
 	// You can either verify the UniqueID or the tuple (SignerID, ProductID, SecurityVersion, Debug).
+	fmt.Printf("%12s : %d\n","securityVer",report.SecurityVersion)
+	fmt.Printf("%12s : %s\n","uniqueID",hex.EncodeToString(report.UniqueID))
+	fmt.Printf("%12s : %s\n","signerID",hex.EncodeToString(report.SignerID))
+	fmt.Printf("%12s : %d\n","productID",binary.LittleEndian.Uint16(report.ProductID))
+	fmt.Printf("%12s : %t\n","debug",report.Debug)
 
 	if report.SecurityVersion < 2 {
 		return errors.New("invalid security version")
